@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ShoppingList from './ShoppingList.js'
 
 class App extends Component {
+    constructor() {
+        super();
+        this.state = {
+            checkboxNames: ["a1", "a2", "a3"]
+        }
+    };
+
+
+
   render() {
     return (
+
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -16,7 +27,8 @@ class App extends Component {
         </p>
           <p>
               hello, world.
-
+              <hr/>
+              <ShoppingList name="Mark" params={this.state}/><ShoppingList name="John" params={this.state}/>
           </p>
       </div>
     );
@@ -24,3 +36,6 @@ class App extends Component {
 }
 
 export default App;
+
+
+
