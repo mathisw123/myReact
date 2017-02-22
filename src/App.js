@@ -25,11 +25,11 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
 
         </p>
-          <p>
+          <div>
               hello, world.
               <hr/>
               <ShoppingList name="Mark" params={this.state}/><ShoppingList name="John" params={this.state}/>
-          </p>
+          </div>
       </div>
     );
   }

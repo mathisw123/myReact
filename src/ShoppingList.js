@@ -5,45 +5,68 @@ import React, { Component } from 'react';
 
 class ShoppingList extends React.Component {
     render() {
-
         return (
-
             <div className="shopping-list">
-
                 <h1>Shopping List for {this.props.name}</h1>
-
-
                 <ul>
                     {
-                        this.props.params.checkboxNames.map(function(name,index){
-                            return   (
-                                <div id={index}>
-                                <CustomRow label={name} key={index+1}></CustomRow>
-aaaa{index}
-                                    <myInput key={name}></myInput>
-                                </div>
-                            )
-
-                        })
-
-
+                        this.generateContent()
                     }
-
                 </ul>
                 <hr/>
             </div>
-
         );
     }
 
-
-
+    generateContent() {
+        var content = this.props.params.checkboxNames.map(function (name, index) {
+            return (
+                <div id={index} key={index + "_div"}>
+                    <CustomRow label={name} key={index + 1}>1</CustomRow>
+                    <MyInput/>
+                    <InputRow/><br/>
+                    <Clock/>
+                </div>
+            )
+        });
+        return content;
+    }
 }
+
+var Clock = React.createClass({
+
+    render: function(){
+        this.state = {date: new Date()};
+
+       return (
+           <div>
+               <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+           </div>
+       )
+    },
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => this.tick(),
+            1000
+        );
+    },
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    },
+
+    tick() {
+        this.setState({
+            date: new Date()
+        });
+    }
+})
+
 
 
 var CustomRow = React.createClass({
     render: function(){
-        return <li>abc</li>
+        return <li>CustomRow</li>
     },
 
     handleChange(event) {
@@ -51,16 +74,20 @@ var CustomRow = React.createClass({
     }
 })
 
-var myInput = React.createClass({
+var MyInput = React.createClass({
     render: function(){
-        return 123
+        return <li>myinput</li>
+    },
+    handleChange(event) {
+        console.log(event.target.value);
     }
 })
 
 
-class inputRow extends React.Component {
+
+class InputRow extends Component {
     render(){
-        return <li>  def</li>
+        return <li>  InputRow</li>;
     }
 }
 
